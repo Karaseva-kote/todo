@@ -1,0 +1,39 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Your todo</title>
+
+<table>
+    <tr>
+        <td>
+            <form method="GET" action="/manageLists">
+                <input type="hidden" value="listId">
+                <button type="submit">Manage lists</button>
+            </form>
+        </td>
+    </tr>
+</table>
+<table>
+    <th:block th:each="case : ${cases}">
+        <tr>
+            <td th:text="${case.getDescription()}"/>
+            <td>
+                <form method="POST" action="/updateCase">
+                    <input type="hidden" name="caseId" th:value="${case.getId()}">
+                    <button type="submit">Done</button>
+                </form>
+            </td>
+        </tr>
+    </th:block>
+</table>
+<table>
+    <tr>
+        <td>
+            <form method="POST" action="/addCase">
+                <input type="text" name="description" autofocus>
+                <button type="submit">Add</button>
+            </form>
+        </td>
+    </tr>
+</table>
+</html>
